@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="radi">
+
+	<!--현재 날짜 DB 존재여부 확인  -->
+	<select id="radi_list_date" resultType="vo.RadiVo" parameterType="String">
+		select * from direct_radiation
+		where to_char(time, 'YYYY-MM-DD"T"HH24:MI:SS') LIKE #{date} || '%'
+		order by time
+	</select>
+	
+	<!--전체조회 -->
+	<select id="radi_list" resultType="vo.RadiVO">
+		select * from direct_radiation
+	</select>
+	
+	<!--radi DB추가 -->
+	<insert id="insert" parameterType="java.util.Map">
+		insert into direct_radiation values(
+			seq_radiation_idx.nextVal,
+			#{radi},
+			TO_DATE(#{time}, 'YYYY-MM-DD"T"HH24:MI:SS')
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
